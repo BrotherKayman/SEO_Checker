@@ -1,18 +1,35 @@
+import './App.css';
 
-import './App.css'
-import Login from './Login/Login'
-import InputContainer from './URL_Checker/URL_Checker'
-import Navbar from './Header/Navbar'
+import Navbar from './Header/Navbar';
+import SignUp from './Button/SignUp';
+import SEOCheck from './SEOCheck/SEOCheck';
+import AddPostForm from './Blog/BlogPost';
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import BlogList from "./Blog/Blog";
+import BlogPost from "./Blog/BlogPost";
+
 function App() {
-
   return (
-    <>
-      <Navbar/>
-      <Login/>
-      <br></br>
-      <InputContainer/>
-    </>
-  )
+    <Router>
+      <div>
+        <Navbar />
+        <br />
+
+        <SignUp />
+        <br />
+        
+        <SEOCheck />
+        <AddPostForm />
+
+        {/* The updated routes */}
+        <Routes>
+          <Route path="/" element={<BlogList />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
