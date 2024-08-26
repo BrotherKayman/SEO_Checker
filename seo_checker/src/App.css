@@ -3,40 +3,50 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: rgb(244, 253, 252);
+  width: 100vw;
+  height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em rgba(100, 108, 255, 0.6666666667));
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em rgba(97, 218, 251, 0.6666666667));
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
   }
 }
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-.card {
-  padding: 2em;
+
+.circle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 5;
 }
 
-.read-the-docs {
-  color: #888;
-}/*# sourceMappingURL=App.css.map */
+.circle-fill {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(52, 181, 255, 0.7);
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .circle-fill {
+    width: 20px;
+    height: 20px;
+  }
+}
+.circle-border {
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(52, 181, 255, 0.7);;
+  border-radius: 50%;
+  transition: transform 0.7s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .circle-border {
+    width: 40px;
+    height: 40px;
+  }
+  #root{
+    height: 100vh;
+  }
+}
