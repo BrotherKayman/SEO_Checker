@@ -9,7 +9,6 @@ interface SEOCheckResult {
   content: string;
 }
 
-// Styled components
 const Container = styled('div')(({ theme }) => ({
   padding: theme.spacing(2),
   display: 'flex',
@@ -42,25 +41,25 @@ const Percentage = styled(Typography)(({ theme }) => ({
   marginTop: theme.spacing(2),
 }));
 
-const MarketingText = styled('div')(({ theme }) => ({
-  marginTop: theme.spacing(4),
-  textAlign: 'center',
+const MarketingCard = styled(Card)(({ theme }) => ({
+  width: '100%',
   maxWidth: '600px',
+  marginTop: theme.spacing(4),
 }));
 
 const SEOCheck = () => {
-  const [url, setUrl] = useState<string>('');  // User input URL
-  const [results, setResults] = useState<SEOCheckResult[]>([]);  // SEO check results
-  const [checkedUrl, setCheckedUrl] = useState<string | null>(null);  // The URL checked
-  const [error, setError] = useState<string | null>(null);  // Error messages
-  const [loading, setLoading] = useState<boolean>(false);  // Loading state
+  const [url, setUrl] = useState<string>('');
+  const [results, setResults] = useState<SEOCheckResult[]>([]);
+  const [checkedUrl, setCheckedUrl] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
   };
 
   const handleCheckSEO = async () => {
-    setLoading(true);  // Start loading
+    setLoading(true);
     try {
       const mockApiUrl = `https://4292740b-911c-4965-ad42-603425255508.mock.pstmn.io/seo-check?url=${encodeURIComponent(url)}`;
       const { data } = await axios.get(mockApiUrl, { responseType: 'text' });
@@ -102,16 +101,15 @@ const SEOCheck = () => {
         },
       ];
 
-      // Calculate SEO score (example: simple scoring based on the number of checks)
       const score = (results.filter(result => result.exists).length / results.length) * 100;
 
-      setResults(results);  // Set results
-      setCheckedUrl(url);  // Save the entered URL that was checked
-      setError(null);  // Clear any errors
-      setLoading(false);  // Stop loading
+      setResults(results);
+      setCheckedUrl(url);
+      setError(null);
+      setLoading(false);
     } catch (err) {
       setError('Failed to fetch or parse the mock API');
-      setLoading(false);  // Stop loading
+      setLoading(false);
     }
   };
 
@@ -181,6 +179,22 @@ const SEOCheck = () => {
         </>
       )}
 
+      <MarketingCard>
+        <CardContent>
+          <Typography variant="h5" gutterBottom>
+            Optimize Your Website with Confidence
+          </Typography>
+          <Typography paragraph>
+            Are you looking to enhance your website's visibility and performance? Our SEO Check tool provides a comprehensive analysis of your webpage's essential SEO elements. By simply entering your URL, you can quickly evaluate critical components such as title tags, headers, meta descriptions, and image alt texts.
+          </Typography>
+          <Typography paragraph>
+            With our easy-to-use interface and real-time results, you can identify areas for improvement and ensure that your site is optimized for search engines. Whether you're a business owner, a digital marketer, or a web developer, our tool helps you make data-driven decisions to boost your website's SEO.
+          </Typography>
+          <Typography paragraph>
+            Ready to take your SEO strategy to the next level? Start analyzing your website now and unlock its full potential!
+          </Typography>
+        </CardContent>
+      </MarketingCard>
     </Container>
   );
 };
