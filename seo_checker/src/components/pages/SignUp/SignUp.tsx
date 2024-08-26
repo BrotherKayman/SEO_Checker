@@ -1,17 +1,24 @@
-//import React, { useState } from 'react';
+import React, { useState } from 'react';
 import '../../../App.css';
 import './SignUp.css';
 
-
 const SignUp: React.FC = () => {
-  const handleGoogleSignIn = () => {
-    window.open('https://accounts.google.com/signin', '_blank');
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const handleFormSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    setIsPopupVisible(true);
+  };
+
+  const handlePopupClose = () => {
+    setIsPopupVisible(false);
   };
 
   return (
     <div className='signup-container'>
       <h1>Sign Up</h1>
-      <form className='signup-form'>
+      <form className='signup-form' onSubmit={handleFormSubmit}>
         <label htmlFor='name'>Name:</label>
         <input type='text' id='name' name='name' placeholder='John' required />
 
@@ -24,11 +31,21 @@ const SignUp: React.FC = () => {
         <button type='submit' className='btn-submit'>Sign Up</button>
       </form>
       <div className='google-signin'>
-        <button onClick={handleGoogleSignIn} className='btn-google'>
+        <button onClick={() => window.open('https://accounts.google.com/signin', '_blank')} className='btn-google'>
           Sign in with Google
         </button>
       </div>
-      
+
+      {/* Popup Component */}
+      {isPopupVisible && (
+        <div className="popup">
+          <div className="popup-content">
+            <h2>Check your email</h2>
+            <p>Please check your email and click on the verification link to complete your signup.</p>
+            <button className="popup-close-btn" onClick={handlePopupClose}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
