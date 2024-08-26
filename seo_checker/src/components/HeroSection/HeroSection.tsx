@@ -4,8 +4,8 @@ import { Button } from './Button';
 import './HeroSection.css';
 
 const HeroSection: React.FC = () => {
-  const [mousePosition, setMousePosition] = useState({ x: -200, y: -200 }); // Initialize off-screen
-  const [isInBounds, setIsInBounds] = useState(false); // Track if the cursor is within bounds
+  const [mousePosition, setMousePosition] = useState({ x: -200, y: -200 });
+  const [isInBounds, setIsInBounds] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -15,7 +15,6 @@ const HeroSection: React.FC = () => {
         const xPos = event.clientX - rect.left;
         const yPos = event.clientY - rect.top;
 
-        // Check if the mouse is within the bounds of the container
         if (
           xPos >= 0 &&
           xPos <= rect.width &&
@@ -25,7 +24,6 @@ const HeroSection: React.FC = () => {
           setMousePosition({ x: xPos, y: yPos });
           setIsInBounds(true);
         } else {
-          // Fade effect by moving the cursor off the screen in the direction it leaves
           if (xPos < 0) {
             setMousePosition({ x: -100, y: yPos });
           } else if (xPos > rect.width) {
