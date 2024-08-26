@@ -1,0 +1,85 @@
+*{
+  color: #357796;
+}
+.hero-container {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.cursor-effect {
+  position: absolute;
+  pointer-events: none;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(65, 138, 206, 0.3);
+  border-radius: 50%;
+  -webkit-backdrop-filter: blur(50px);
+          backdrop-filter: blur(50px);
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.hero-container > h1 {
+  color: #357796;
+  font-size: 100px;
+  margin-top: -100px;
+  z-index: 2;
+}
+
+.hero-container > p {
+  margin-top: 8px;
+  color: #357796;
+  font-size: 32px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  z-index: 2;
+}
+
+.hero-btns {
+  margin-top: 32px;
+  z-index: 2;
+}
+.hero-btns .btn:hover{
+  background-color: #357796;
+  color: white;
+}
+
+.hero-btns .btn {
+  margin: 6px;
+  border-color: #357796;
+  color: #357796;
+}
+
+watch-demo{
+  margin-left: 4px;
+}
+
+@media screen and (max-width: 960px) {
+  .hero-container > h1 {
+    font-size: 70px;
+    margin-top: -150px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .hero-container > h1 {
+    font-size: 50px;
+    margin-top: -100px;
+  }
+  .hero-container > p {
+    font-size: 30px;
+  }
+  .btn-mobile {
+    display: block;
+    text-decoration: none;
+  }
+  .btn {
+    width: 100%;
+  }
+}

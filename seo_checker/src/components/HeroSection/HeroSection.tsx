@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../App.css';
-
+import '../../App.css';
+import { Button } from './Button';
 import './HeroSection.css';
 
 const HeroSection: React.FC = () => {
-  const [mousePosition, setMousePosition] = useState({ x: -200, y: -200 });
-  const [isInBounds, setIsInBounds] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: -200, y: -200 }); // Initialize off-screen
+  const [isInBounds, setIsInBounds] = useState(false); // Track if the cursor is within bounds
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -15,6 +15,7 @@ const HeroSection: React.FC = () => {
         const xPos = event.clientX - rect.left;
         const yPos = event.clientY - rect.top;
 
+        // Check if the mouse is within the bounds of the container
         if (
           xPos >= 0 &&
           xPos <= rect.width &&
@@ -24,8 +25,16 @@ const HeroSection: React.FC = () => {
           setMousePosition({ x: xPos, y: yPos });
           setIsInBounds(true);
         } else {
-          
-          setMousePosition({ x: -200, y: -200 });
+          // Fade effect by moving the cursor off the screen in the direction it leaves
+          if (xPos < 0) {
+            setMousePosition({ x: -100, y: yPos });
+          } else if (xPos > rect.width) {
+            setMousePosition({ x: rect.width + 100, y: yPos });
+          } else if (yPos < 0) {
+            setMousePosition({ x: xPos, y: -100 });
+          } else if (yPos > rect.height) {
+            setMousePosition({ x: xPos, y: rect.height + 100 });
+          }
           setIsInBounds(false);
         }
       }
@@ -45,17 +54,33 @@ const HeroSection: React.FC = () => {
 
   return (
     <div className='hero-container' ref={heroRef}>
-      {isInBounds && (
-        <div
-          className='cursor-effect'
-          style={{
-            top: `${mousePosition.y - 100}px`,
-            left: `${mousePosition.x - 100}px`,
-          }}
-        ></div>
-      )}
+      <div
+        className='cursor-effect'
+        style={{
+          top: `${mousePosition.y - 50}px`,
+          left: `${mousePosition.x - 50}px`,
+        }}
+      ></div>
 
-      
+      <h1>RANK HIGHER</h1>
+      <p>Try our free SEO tool</p>
+      <div className='hero-btns'>
+        <Button
+          className='btns'
+          buttonStyle='btn--outline'
+          buttonSize='btn--large'
+        >
+          GET STARTED
+        </Button>
+        <Button
+          className='btns'
+          buttonStyle='btn--primary'
+          buttonSize='btn--large'
+          onClick={() => console.log('hey')}
+        >
+          WATCH DEMO <i className='watch-demo' />
+        </Button>
+      </div>
     </div>
   );
 };
