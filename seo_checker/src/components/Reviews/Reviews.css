@@ -1,0 +1,49 @@
+.reviews-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.reviews-slider {
+  display: flex;
+  width: calc(100% * 3); 
+  transition: transform 1s ease-in-out;
+}
+
+.review-card {
+  flex: 0 0 33.333%;
+  box-sizing: border-box;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: black;
+}
+
+.review-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.review-company {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.review-stars {
+  font-size: 1.5rem;
+  color: #f39c12;
+  margin-bottom: 10px;
+}
+
+.review-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.review-date {
+  font-size: 0.9rem;
+  color: #888;
+}
