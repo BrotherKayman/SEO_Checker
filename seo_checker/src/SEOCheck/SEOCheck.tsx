@@ -125,7 +125,7 @@ const SEOCheck = () => {
         Check Your Website SEO
       </Typography>
       <Input
-        label="Enter URL"
+        label="https://yourwebsite.com"
         variant="outlined"
         value={url}
         onChange={handleInputChange}
