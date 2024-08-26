@@ -7,7 +7,7 @@ const SignUp: React.FC = () => {
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
+    
     setIsPopupVisible(true);
   };
 
