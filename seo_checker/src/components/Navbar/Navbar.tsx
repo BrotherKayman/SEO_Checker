@@ -1,70 +1,127 @@
-import { useState, useEffect } from 'react';
-import { Button } from '../Button';
+import React, { useState } from 'react';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Button,
+  Box,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
-import './Navbar.scss';
 
-function Navbar() {
-  const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
+const Navbar: React.FC = () => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
-
-  const showButton = () => {
-    if (window.innerWidth <= 960) {
-      setButton(false);
-    } else {
-      setButton(true);
-    }
+  const toggleDrawer = (open: boolean) => {
+    setDrawerOpen(open);
   };
 
-  useEffect(() => {
-    showButton();
-    window.addEventListener('resize', showButton);
-
-    return () => window.removeEventListener('resize', showButton);
-  }, []);
+  // Style for hover effect
+  const hoverStyle = {
+    '&:hover': {
+      color: 'rgb(244, 253, 252)',
+      backgroundColor: 'rgb(4, 63, 87)',
+    },
+  };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
-          TOP SEO <i className="fab fa-typo3" />
-        </Link>
-        <div className="menu-icon" onClick={handleClick}>
-          <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-        </div>
-        <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-          <li className="nav-item">
-            <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/services" className="nav-links" onClick={closeMobileMenu}>
-              Tools
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/products" className="nav-links" onClick={closeMobileMenu}>
-              Products
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/blog" className="nav-links" onClick={closeMobileMenu}>
-              Blog
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/sign-up" className="nav-links-mobile" onClick={closeMobileMenu}>
+    <>
+      <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+        <Toolbar>
+          {/* Desktop Links */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, justifyContent: 'center', gap: 2 }}>
+            {['Home', 'Tools', 'Products', 'Blog'].map((text) => (
+              <Button
+                key={text}
+                component={Link}
+                to={`/${text.toLowerCase()}`}
+                color="inherit"
+                sx={hoverStyle}
+              >
+                {text}
+              </Button>
+            ))}
+            
+            <Button
+              component={Link}
+              to="/signin"
+              color="inherit"
+              sx={hoverStyle}
+            >
+              Admin
+            </Button>
+            <Button
+              component={Link}
+              to="/sign-up"
+              variant="outlined"
+              color="inherit"
+              sx={hoverStyle}
+            >
               Sign Up
-            </Link>
-          </li>
-        </ul>
-        {button && <Button buttonStyle="btn--outline">SIGN UP</Button>}
-      </div>
-    </nav>
+            </Button>
+          </Box>
+
+          {/* Mobile Menu Icon */}
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ display: { xs: 'flex', md: 'none' }, fontSize: 30 }}
+            onClick={() => toggleDrawer(true)}
+          >
+            <MenuIcon sx={{ fontSize: 'inherit' }} />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
+      {/* Mobile Drawer */}
+      <Drawer anchor="right" open={drawerOpen} onClose={() => toggleDrawer(false)}>
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={() => toggleDrawer(false)}
+          onKeyDown={() => toggleDrawer(false)}
+        >
+          <List>
+            {['Home', 'Tools', 'Products', 'Blog', 'Sign Up'].map((text) => (
+              <ListItem
+                button
+                key={text}
+                component={Link}
+                to={`/${text.toLowerCase().replace(' ', '-')}`}
+                sx={{
+                  ...hoverStyle,
+                  '& .MuiListItemText-primary': {
+                    color: 'inherit',
+                  },
+                }}
+              >
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+            
+            <ListItem
+              button
+              component={Link}
+              to="/signin"
+              sx={{
+                ...hoverStyle,
+                '& .MuiListItemText-primary': {
+                  color: 'inherit',
+                },
+              }}
+            >
+              <ListItemText primary="Admin" />
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
+    </>
   );
-}
+};
 
 export default Navbar;
