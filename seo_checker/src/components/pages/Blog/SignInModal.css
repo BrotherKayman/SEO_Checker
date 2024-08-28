@@ -1,4 +1,6 @@
-
+#root{
+  --primary-color: #30557c;
+}
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -20,11 +22,11 @@
     width: 100%;
     color: white;
   h2{
-    color: rgb(35, 129, 153);
+    color: var(--primary-color);
   }
   button {
     margin-top: 10px;
-    background-color: rgb(35, 129, 153);
+    background-color: var(--primary-color);
     justify-content: space-between;
     color: white;
     margin-left: 10px;
