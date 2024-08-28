@@ -26,9 +26,9 @@ const AdminDashboard: React.FC = () => {
   const [page, setPage] = useState(0);
 
   const transactions = [
-    { id: 1, user: 'Andrew James', amount: 'R129', date: '2024-08-24' },
+    { id: 1, user: 'Prince Segole', amount: 'R129', date: '2024-08-24' },
     { id: 2, user: 'Jane Smith', amount: 'R199', date: '2024-08-23' },
-    { id: 3, user: 'Prince Segole', amount: 'R199', date: '2024-08-12' },
+    { id: 3, user: 'Andrew Ngumbao', amount: 'R199', date: '2024-08-12' },
     { id: 4, user: 'Veronica Madison', amount: 'R99', date: '2024-07-10' },
     { id: 5, user: 'Moses Adams', amount: 'R49', date: '2024-07-07' },
     { id: 6, user: 'John Modise', amount: 'R199', date: '2024-07-07' },
